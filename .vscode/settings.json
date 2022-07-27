@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "numeric": "cpp"
+  },
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "cSpell.ignoreWords": [
+    "repd",
+    "chmax",
+    "chmin"
+  ]
+}
