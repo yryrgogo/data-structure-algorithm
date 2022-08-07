@@ -2,7 +2,47 @@
 
 #include __FILE__
 
-int main() {}
+int main() {
+  ll N, A;
+  cin >> N >> A;
+  ll x[N + 1];
+  repd(i, 1, N + 1) cin >> x[i];
+
+  ll dp[N + 1][N + 1][A * N + 1];
+
+  // initialize
+  repd(i, 0, N + 1) {
+    repd(j, 0, N + 1) {
+      repd(k, 0, A * N + 1) {
+        if(i > 0 && j == 1 && k == x[i]) {
+          dp[i][j][k] = 1;
+        } else {
+          dp[i][j][k] = 0;
+        }
+      }
+    }
+  }
+
+  repd(i, 1, N + 1) {
+    repd(j, 1, N + 1) {
+      repd(k, 1, A * N + 1) {
+        ll new_card = x[i];
+
+        // 選ばない場合
+        dp[i][j - 1][k] += dp[i - 1][j - 1][k];
+
+        if(k + new_card <= A * N) {
+          // 選ぶ場合
+          dp[i][j][k + new_card] += dp[i - 1][j - 1][k];
+        }
+      };
+    }
+  }
+
+  ll result = 0;
+  repd(j, 1, N + 1) { result += dp[N][j][A * j]; }
+  cout << result << endl;
+}
 
 #else
 
